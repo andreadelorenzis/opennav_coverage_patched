@@ -129,6 +129,10 @@ protected:
   std::unique_ptr<PathGenerator> path_gen_;
   std::unique_ptr<Visualizer> visualizer_;
   bool cartesian_frame_;
+
+  // --- CUSTOM CODE (andrea) ---
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr first_pose_pub_;
+  // --- CUSTOM CODE ---
 };
 
 }  // namespace opennav_coverage

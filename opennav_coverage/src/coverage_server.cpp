@@ -40,6 +40,11 @@ CoverageServer::on_configure(const rclcpp_lifecycle::State & /*state*/)
   path_gen_ = std::make_unique<PathGenerator>(node, robot_params_.get());
   visualizer_ = std::make_unique<Visualizer>();
 
+  // --- CUSTOM CODE (andrea) ---
+  first_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
+  "coverage_first_pose", 10);
+  // --- CUSTOM CODE (andrea) ---
+
   // If in GPS coordinates, we must convert to a CRS to compute coverage
   // Then, reconvert back to GPS for the user.
   nav2_util::declare_parameter_if_not_declared(
@@ -213,10 +218,17 @@ void CoverageServer::computeCoveragePath()
       // Converts UTM back to GPS, if necessary, for action returns
       if (goal->generate_path) {
         path = path_gen_->generatePath(route, goal->path_mode);
+
         result->coverage_path =
           util::toCoveragePathMsg(path, master_field, header, cartesian_frame_);
         result->nav_path = util::toNavPathMsg(
           path, master_field, header, cartesian_frame_, path_gen_->getTurnPointDistance());
+
+        // --- CUSTOM CODE (andrea)
+        const auto & first_pose_msg = result->nav_path.poses.front();
+        first_pose_pub_->publish(first_pose_msg);
+        // --- CUSTOM CODE (andrea)
+        
       } else {
         result->coverage_path =
           util::toCoveragePathMsg(route, master_field, true, header, cartesian_frame_);

@@ -1,3 +1,5 @@
+find_package(GDAL REQUIRED)
+
 #Test Swath generation
 ament_add_gtest(test_swath_generator
   test_swath_generator.cpp
@@ -7,6 +9,7 @@ ament_target_dependencies(test_swath_generator
 )
 target_link_libraries(test_swath_generator
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 #Test utils
@@ -18,4 +21,5 @@ ament_target_dependencies(test_utils
 )
 target_link_libraries(test_utils
   ${library_name}
+  ${GDAL_LIBRARIES}
 )

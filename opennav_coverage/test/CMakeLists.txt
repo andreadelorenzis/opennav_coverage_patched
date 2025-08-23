@@ -1,3 +1,5 @@
+find_package(GDAL REQUIRED)
+
 # Test utils
 ament_add_gtest(test_utils
   test_utils.cpp
@@ -7,6 +9,7 @@ ament_target_dependencies(test_utils
 )
 target_link_libraries(test_utils
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test robot
@@ -18,6 +21,7 @@ ament_target_dependencies(test_robot
 )
 target_link_libraries(test_robot
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test visualizations
@@ -29,6 +33,7 @@ ament_target_dependencies(test_viz
 )
 target_link_libraries(test_viz
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test headland
@@ -40,6 +45,7 @@ ament_target_dependencies(test_headland
 )
 target_link_libraries(test_headland
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test swath
@@ -51,6 +57,7 @@ ament_target_dependencies(test_swath
 )
 target_link_libraries(test_swath
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test route
@@ -62,6 +69,7 @@ ament_target_dependencies(test_route
 )
 target_link_libraries(test_route
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test path
@@ -73,6 +81,7 @@ ament_target_dependencies(test_path
 )
 target_link_libraries(test_path
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
 
 # Test server
@@ -84,4 +93,5 @@ ament_target_dependencies(test_server
 )
 target_link_libraries(test_server
   ${library_name}
+  ${GDAL_LIBRARIES}
 )
